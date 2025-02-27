@@ -40,21 +40,28 @@ extension MediaQueryValues on BuildContext {
   double get aspectRatio => size.aspectRatio;
 
   //! Navigation
-  Future navigateTo(String routeName, [Object? arguments]) =>
+  Future navigateTo(
+    String routeName, {
+    Object? arguments,
+  }) =>
       Navigator.of(this).pushNamed(
         routeName,
         arguments: arguments,
       );
 
-  Future<dynamic> navigateToWithReplacementNamed(String routeName,
-          {Object? arguments}) =>
+  Future<dynamic> navigateToWithReplacementNamed(
+    String routeName, {
+    Object? arguments,
+  }) =>
       Navigator.of(this).pushReplacementNamed(
         routeName,
         arguments: arguments,
       );
 
-  Future<dynamic> navigateToWithReplacementAndClearStack(String routeName,
-          {Object? arguments}) =>
+  Future<dynamic> navigateToWithReplacementAndClearStack(
+    String routeName, {
+    Object? arguments,
+  }) =>
       Navigator.of(this).pushNamedAndRemoveUntil(
         routeName,
         (route) => false,

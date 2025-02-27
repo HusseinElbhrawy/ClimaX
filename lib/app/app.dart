@@ -1,6 +1,5 @@
 import 'package:climax/config/routes/app_navigation.dart';
 import 'package:climax/config/routes/app_routes.dart';
-import 'package:climax/config/routes/route_observer.dart';
 import 'package:climax/config/theme/light_theme.dart';
 import 'package:climax/core/utils/app_colors.dart';
 import 'package:climax/core/utils/app_strings.dart';
@@ -27,9 +26,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         onGenerateRoute: AppRoutes.onGenerateRoute,
         navigatorKey: AppNavigation.navigatorKey,
-        navigatorObservers: [kRouteObserver],
         theme: kLightTheme,
-        darkTheme: ThemeData.dark(),
+        // darkTheme: ThemeData.dark(),
         themeMode: ThemeMode.system,
         initialRoute: Routes.splashRoute,
       ),
