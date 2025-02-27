@@ -2,6 +2,8 @@ import 'package:climax/core/utils/media_query_values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../core/widgets/custom_leading_back_button_widget.dart';
+
 class WeatherDetailsAppBarWidget extends StatelessWidget
     implements PreferredSizeWidget {
   const WeatherDetailsAppBarWidget({
@@ -11,13 +13,7 @@ class WeatherDetailsAppBarWidget extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: IconButton(
-        icon: Icon(
-          Icons.arrow_back_ios,
-          color: context.whiteColor,
-        ),
-        onPressed: () => context.mayPop(),
-      ),
+      leading: const CustomLeadingBackButtonWidget(),
       title: Text(
         'Tanta',
         style: TextStyle(
