@@ -1,6 +1,6 @@
 import 'package:climax/core/utils/app_assets.dart';
 import 'package:climax/features/home/data/models/weather_secondary_info_model.dart';
-import 'package:climax/features/home/presentation/widget/weather_secondary_info_widget.dart';
+import 'package:climax/features/home/presentation/widget/home/weather_secondary_info_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -33,10 +33,11 @@ class _WeatherSecondaryWidgetState extends State<WeatherSecondaryWidget> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      child: Wrap(
-        alignment: WrapAlignment.spaceAround,
+      child: Row(
+        // alignment: WrapAlignment.spaceAround,
         spacing: 12.w,
-        runSpacing: 16.h,
+        // runSpacing: 16.h,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: List.generate(
           3,
           (index) {

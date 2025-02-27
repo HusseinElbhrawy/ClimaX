@@ -1,5 +1,6 @@
 import 'package:climax/core/utils/app_strings.dart';
-import 'package:climax/features/home/presentation/screens/home_screen.dart';
+import 'package:climax/features/home/presentation/screens/home/home_screen.dart';
+import 'package:climax/features/home/presentation/screens/weather_details/weather_details_screen.dart';
 import 'package:climax/features/onboarding/presentation/screens/on_boarding_screen.dart';
 import 'package:climax/features/splash/presentation/screens/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,6 +10,7 @@ class Routes {
   static const String splashRoute = '/splash';
   static const String onboardingRoute = '/onboarding';
   static const String homeRoute = '/home';
+  static const String weatherDetailsRoute = '/weather-details';
   static const String searchRoute = '/search';
 }
 
@@ -21,13 +23,18 @@ class AppRoutes {
           settings: routeSettings,
         );
       case Routes.onboardingRoute:
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const OnBoardingScreen(),
           settings: routeSettings,
         );
       case Routes.homeRoute:
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const HomeScreen(),
+          settings: routeSettings,
+        );
+      case Routes.weatherDetailsRoute:
+        return CupertinoPageRoute(
+          builder: (_) => const WeatherDetailsScreen(),
           settings: routeSettings,
         );
       // case Routes.searchRoute:

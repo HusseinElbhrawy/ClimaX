@@ -1,13 +1,13 @@
 import 'package:climax/core/utils/constant.dart';
-import 'package:climax/features/home/presentation/widget/other_weather_days_widget.dart';
-import 'package:climax/features/home/presentation/widget/today_and_next_days_button_widget.dart';
+import 'package:climax/features/home/presentation/widget/home/other_weather_days_widget.dart';
+import 'package:climax/features/home/presentation/widget/home/today_and_next_days_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../widget/custom_text_date_widget.dart';
-import '../widget/home_app_bar_widget.dart';
-import '../widget/main_weather_info_widget.dart';
-import '../widget/weather_secondary_widget.dart';
+import '../../widget/home/custom_text_date_widget.dart';
+import '../../widget/home/home_app_bar_widget.dart';
+import '../../widget/home/main_weather_info_widget.dart';
+import '../../widget/home/weather_secondary_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
