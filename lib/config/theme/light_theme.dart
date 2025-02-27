@@ -33,13 +33,13 @@ ThemeData get kLightTheme => ThemeData(
           color: AppColors.black,
           fontSize: 16.sp,
         ),
-        systemOverlayStyle: SystemUiOverlayStyle(
+        systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: AppColors.lightBackground,
           statusBarIconBrightness: Brightness.dark,
         ),
       ),
       //* Text ThemeData
-      textTheme: TextTheme(
+      textTheme: const TextTheme(
         displayLarge: TextStyle(
           color: AppColors.lightText,
           fontFamily: AppFonts.chillax,
@@ -127,10 +127,6 @@ ThemeData get kLightTheme => ThemeData(
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.r),
-            // side: BorderSide(
-            //   color: AppColors.primaryColor,
-            //   width: AppSize.s1_5.r,
-            // ),
           ),
         ),
       ),
