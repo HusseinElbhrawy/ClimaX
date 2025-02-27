@@ -1,9 +1,6 @@
-import 'package:climax/core/utils/app_colors.dart';
-import 'package:climax/core/utils/media_query_values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../config/routes/app_navigation.dart';
 import 'fonts_manager.dart';
 
 TextStyle _getTextStyle(double fontSize, FontWeight fontWeight, Color color) {
@@ -17,49 +14,49 @@ TextStyle _getTextStyle(double fontSize, FontWeight fontWeight, Color color) {
 
 // regular style
 
-TextStyle getRegularStyle({double? fontSize, Color? color}) {
+TextStyle getRegularStyle({double? fontSize, required Color color}) {
   return _getTextStyle(
     fontSize?.sp ?? FontSize.s14.sp,
     AppFontsWeight.regular,
-    color ?? AppNavigation.navigatorKey.currentContext!.defaultTextColor,
+    color,
   );
 }
 
 // medium style
 
-TextStyle getMediumStyle({double? fontSize, Color? color}) {
+TextStyle getMediumStyle({double? fontSize, required Color color}) {
   return _getTextStyle(
     fontSize?.sp ?? FontSize.s14.sp,
     AppFontsWeight.medium,
-    color ?? AppNavigation.navigatorKey.currentContext!.defaultTextColor,
+    color,
   );
 }
 
 // light style
-TextStyle getLightStyle({double? fontSize, Color? color}) {
+TextStyle getLightStyle({double? fontSize, required Color color}) {
   return _getTextStyle(
     fontSize?.sp ?? FontSize.s14.sp,
     AppFontsWeight.light,
-    color ?? AppNavigation.navigatorKey.currentContext!.defaultTextColor,
+    color,
   );
 }
 
 // bold style
 
-TextStyle getBoldStyle({double? fontSize, Color? color}) {
+TextStyle getBoldStyle({double? fontSize, required Color color}) {
   return _getTextStyle(
     fontSize?.sp ?? FontSize.s14.sp,
     AppFontsWeight.bold,
-    color ?? AppColors.black,
+    color,
   );
 }
 
 // semibold style
 
-TextStyle getSemiBoldStyle({double? fontSize, Color? color}) {
+TextStyle getSemiBoldStyle({double? fontSize, required Color color}) {
   return _getTextStyle(
     fontSize?.sp ?? FontSize.s14.sp,
     AppFontsWeight.semiBold,
-    color ?? AppNavigation.navigatorKey.currentContext!.defaultTextColor,
+    color,
   );
 }

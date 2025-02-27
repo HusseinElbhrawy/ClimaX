@@ -27,7 +27,8 @@ class ColorLogger {
   //! General method for printing with color
   void _log(String message, {String color = 'white'}) {
     final colorCode = _colorCodes[color.toLowerCase()] ?? _colorCodes['white'];
-    log('$colorCode$message\x1B[0m'); //! \x1B[0m resets color
+    log('$colorCode$message\x1B[0m',
+        name: 'ColorLogger'); //! \x1B[0m resets color
   }
 
   //! Specific methods for each color for convenience
