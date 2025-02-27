@@ -29,10 +29,10 @@ ThemeData get kLightTheme => ThemeData(
         iconTheme: const IconThemeData(
           color: AppColors.black,
         ),
-        titleTextStyle: getBoldStyle(
+        titleTextStyle: getSemiBoldStyle(
           color: AppColors.black,
           fontSize: 16.sp,
-        ).copyWith(fontWeight: FontWeight.w900),
+        ),
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: AppColors.lightBackground,
           statusBarIconBrightness: Brightness.dark,

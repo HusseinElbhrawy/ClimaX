@@ -1,9 +1,11 @@
 import 'package:climax/core/utils/app_assets.dart';
 import 'package:climax/core/utils/app_colors.dart';
-import 'package:climax/core/utils/media_query_values.dart';
-import 'package:climax/core/utils/style_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'main_info_weather_data_status_logo_widget.dart';
+import 'main_info_weather_data_status_widget.dart';
+import 'main_info_weather_data_temp_text_widget.dart';
 
 class MainWeatherInfoWidget extends StatelessWidget {
   const MainWeatherInfoWidget({
@@ -28,33 +30,18 @@ class MainWeatherInfoWidget extends StatelessWidget {
               PositionedDirectional(
                 top: 36.h,
                 end: 22.w,
-                child: Text(
-                  '15°',
-                  style: getBoldStyle(
-                    fontSize: 84.sp,
-                    color: context.whiteColor.withValues(alpha: 0.75),
-                  ),
-                ),
+                child: MainInfoWeatherDataTempTextWidget(temp: '15'),
               ),
               PositionedDirectional(
                 bottom: 28.h,
                 start: 16.w,
-                child: Text(
-                  'Heavy Cloudy',
-                  style: getMediumStyle(
-                    fontSize: 16.sp,
-                    color: context.whiteColor.withValues(alpha: 0.75),
-                  ),
-                ),
+                child: MainInfoWeatherDataStatusWidget(status: 'Heavy Cloudy'),
               ),
               PositionedDirectional(
                 top: -75.h,
                 start: 16.w,
-                child: Image.asset(
-                  AppImageAssets.heavyCloud,
-                  width: 160.w,
-                  height: 160.h,
-                  fit: BoxFit.contain,
+                child: MainInfoWeatherDataStatusLogoWidget(
+                  imagePath: AppImageAssets.heavyCloud,
                 ),
               ),
             ],
