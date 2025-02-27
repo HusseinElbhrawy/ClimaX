@@ -1,6 +1,8 @@
 import 'package:climax/config/routes/app_navigation.dart';
 import 'package:climax/config/routes/app_routes.dart';
+import 'package:climax/config/theme/dark_theme.dart';
 import 'package:climax/config/theme/light_theme.dart';
+import 'package:climax/config/theme/theme_provider.dart';
 import 'package:climax/core/utils/app_colors.dart';
 import 'package:climax/core/utils/app_strings.dart';
 import 'package:flutter/material.dart';
@@ -18,18 +20,23 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       useInheritedMediaQuery: true,
-      builder: (context, child) => MaterialApp(
-        title: AppStrings.appName,
-        color: AppColors.primaryColor,
-        supportedLocales: const [Locale('ar'), Locale('en')],
-        locale: const Locale('en'),
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute: AppRoutes.onGenerateRoute,
-        navigatorKey: AppNavigation.navigatorKey,
-        theme: kLightTheme,
-        // darkTheme: ThemeData.dark(),
-        themeMode: ThemeMode.system,
-        initialRoute: Routes.splashRoute,
+      builder: (context, child) => ValueListenableBuilder(
+        valueListenable: ThemeManager.themeNotifier,
+        builder: (BuildContext context, themeMode, Widget? child) {
+          return MaterialApp(
+            title: AppStrings.appName,
+            color: AppColors.primaryColor,
+            supportedLocales: const [Locale('ar'), Locale('en')],
+            locale: const Locale('en'),
+            debugShowCheckedModeBanner: false,
+            onGenerateRoute: AppRoutes.onGenerateRoute,
+            navigatorKey: AppNavigation.navigatorKey,
+            theme: kLightTheme,
+            darkTheme: kDarkTheme,
+            themeMode: themeMode,
+            initialRoute: Routes.splashRoute,
+          );
+        },
       ),
     );
   }
