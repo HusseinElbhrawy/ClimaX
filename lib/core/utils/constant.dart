@@ -49,7 +49,7 @@ class AppConstant {
         ),
         OnBoardingModel(
           imagePath: AppSvgAssets.onboarding3,
-          bgColor: Color(0xffE71B5E),
+          bgColor: const Color(0xffE71B5E),
           title: 'Stay',
           subTitle: 'Updated Anytime',
           details:
