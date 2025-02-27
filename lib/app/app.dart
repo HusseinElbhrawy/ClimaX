@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         theme: kLightTheme,
         darkTheme: ThemeData.dark(),
         themeMode: ThemeMode.system,
-        initialRoute: Routes.splashRoute,
+        initialRoute: Routes.homeRoute,
       ),
     );
   }

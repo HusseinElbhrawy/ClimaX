@@ -7,7 +7,15 @@ class AppImageAssets {
   static const AppImageAssets _instance = AppImageAssets._();
   factory AppImageAssets() => _instance;
 
-  static String logo = '$_imagePath/logo.png';
+  static const String logo = '$_imagePath/logo.png';
+  static const String heavyCloud = '$_imagePath/heavy_cloud.png';
+  static const String humidity = '$_imagePath/humidity.png';
+  static const String maxTemp = '$_imagePath/max_temp.png';
+  static const String windSpeed = '$_imagePath/wind_speed.png';
+  static const String lightRain = '$_imagePath/light_rain.png';
+  static const String clear = '$_imagePath/clear.png';
+  static const String lightCloud = '$_imagePath/light_cloud.png';
+  static const String heavyRain = '$_imagePath/heavy_rain.png';
 }
 
 class AppSvgAssets {
