@@ -3,6 +3,8 @@ class AppStrings {
   static const AppStrings _instance = AppStrings._();
   factory AppStrings() => _instance;
 
+  static const String appName = 'ClimaX';
+
   static const String noRouteFound = 'No Route Found';
 
   static const String contentType = 'Content-Type';

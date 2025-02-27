@@ -1,4 +1,6 @@
 import 'package:climax/core/utils/app_strings.dart';
+import 'package:climax/features/splash/presentation/screens/splash_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Routes {
@@ -11,11 +13,11 @@ class Routes {
 class AppRoutes {
   static Route? onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
-      // case Routes.splashRoute:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const SplashScreen(),
-      //     settings: routeSettings,
-      //   );
+      case Routes.splashRoute:
+        return CupertinoPageRoute(
+          builder: (_) => const SplashScreen(),
+          settings: routeSettings,
+        );
       // case Routes.onboardingRoute:
       //   return MaterialPageRoute(
       //     builder: (_) => const OnBoardingScreen(),

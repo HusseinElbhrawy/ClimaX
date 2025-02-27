@@ -3,6 +3,7 @@ import 'package:climax/config/routes/app_routes.dart';
 import 'package:climax/config/routes/route_observer.dart';
 import 'package:climax/config/theme/light_theme.dart';
 import 'package:climax/core/utils/app_colors.dart';
+import 'package:climax/core/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       useInheritedMediaQuery: true,
       builder: (context, child) => MaterialApp(
-        title: 'Climax',
+        title: AppStrings.appName,
         color: AppColors.primaryColor,
         supportedLocales: const [Locale('ar'), Locale('en')],
         locale: const Locale('en'),
