@@ -1,4 +1,5 @@
 import 'package:climax/core/utils/app_strings.dart';
+import 'package:climax/features/onboarding/presentation/screens/on_boarding_screen.dart';
 import 'package:climax/features/splash/presentation/screens/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,11 +19,11 @@ class AppRoutes {
           builder: (_) => const SplashScreen(),
           settings: routeSettings,
         );
-      // case Routes.onboardingRoute:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const OnBoardingScreen(),
-      //     settings: routeSettings,
-      //   );
+      case Routes.onboardingRoute:
+        return MaterialPageRoute(
+          builder: (_) => const OnBoardingScreen(),
+          settings: routeSettings,
+        );
       // case Routes.homeRoute:
       //   return MaterialPageRoute(
       //     builder: (_) => const ForgetPasswordScreen(),
