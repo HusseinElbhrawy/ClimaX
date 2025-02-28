@@ -1,6 +1,7 @@
 import 'package:climax/core/api/api_consumer.dart';
 import 'package:climax/core/api/app_interceptor.dart';
 import 'package:climax/core/logger/logs.dart';
+import 'package:climax/features/home/data/datasources/home_local_data_source.dart';
 import 'package:climax/features/home/data/datasources/home_remote_data_source.dart';
 import 'package:climax/features/home/data/repositories/home_repository.dart';
 import 'package:climax/features/home/logic/home/home_cubit.dart';
@@ -10,6 +11,7 @@ import 'package:climax/features/search/logic/search_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/api/dio_consumer.dart';
 
@@ -46,6 +48,7 @@ Future<void> _setUpRepository() async {
     serviceLocator.registerLazySingleton<HomeRepository>(
       () => HomeRepository(
         serviceLocator(),
+        serviceLocator(),
       ),
     );
   }
@@ -62,6 +65,13 @@ Future<void> _setUpDatasource() async {
   if (!serviceLocator.isRegistered<HomeRemoteDataSource>()) {
     serviceLocator.registerLazySingleton<HomeRemoteDataSource>(
       () => HomeRemoteDataSource(
+        serviceLocator(),
+      ),
+    );
+  }
+  if (!serviceLocator.isRegistered<HomeLocalDataSource>()) {
+    serviceLocator.registerLazySingleton<HomeLocalDataSource>(
+      () => HomeLocalDataSource(
         serviceLocator(),
       ),
     );
@@ -89,8 +99,8 @@ Future<void> _setUpCoreUtils() async {
 }
 
 Future<void> _setUpExternal() async {
-  // final sharedPref = await SharedPreferences.getInstance();
-  // serviceLocator.registerLazySingleton(() => sharedPref);
+  final sharedPref = await SharedPreferences.getInstance();
+  serviceLocator.registerLazySingleton(() => sharedPref);
 
   final dotEnv = DotEnv();
   if (!serviceLocator.isRegistered<DotEnv>()) {
