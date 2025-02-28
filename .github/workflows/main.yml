@@ -9,6 +9,8 @@ jobs:
   build:
     name: Build APK
     runs-on: macos-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout Repository
@@ -70,6 +72,20 @@ jobs:
           draft: false
           prerelease: false
           files: build/app/outputs/flutter-apk/app-release.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # ✅ Explicitly set the token
+      
+      
+      # ! Old  To Make new Github Release
+      # - name: Create GitHub Release
+      #   id: create_release
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     tag_name: v${{ env.version_name }}+${{ env.version_code }}
+      #     name: Release v${{ env.version_name }}+${{ env.version_code }}
+      #     draft: false
+      #     prerelease: false
+      #     files: build/app/outputs/flutter-apk/app-release.apk
 
 
 
