@@ -8,6 +8,9 @@
 
 **ClimaX** is a powerful and user-friendly weather mobile app developed using **[Flutter](https://flutter.dev/)** and **[OpenWeatherAPI](https://openweathermap.org/)**. Stay updated with real-time weather conditions, forecasts, and more! ☀️🌧️❄️
 
+![poster](https://github.com/user-attachments/assets/b8f7499a-d321-47ee-be75-1cba3bcee3be)
+
+
 ---
 
 ## 📚 Table of Contents
@@ -49,15 +52,27 @@ Track the development progress with WakaTime:
 
 ---
 
+
+
+
 ## 🗄️ App Mockup Design
 
-_(Screenshots or design previews go here)_
+| App                     | #1 | #2 | #3 | #4 | #5 | #6 | #7 |
+| ----------------------- | -- | -- | -- | -- | -- | -- | -- |
+| **Light Theme** | ![1](https://github.com/user-attachments/assets/20eade9f-acd3-4532-974b-64ec7826fad5)   |  ![2](https://github.com/user-attachments/assets/9551b786-3087-48df-a66d-d50fbbda5554) |![3](https://github.com/user-attachments/assets/45510162-d6f0-406a-a352-800da1594796)    | ![4](https://github.com/user-attachments/assets/7cb94cdf-50a2-480f-938e-01f2fa35c8b1) | ![5](https://github.com/user-attachments/assets/283c8a98-ff67-496b-b38e-74b4e7f7ad98)   |  ![6](https://github.com/user-attachments/assets/49774274-6cd1-4cb5-aa0d-fce1bd694a47) |![7](https://github.com/user-attachments/assets/f3976fa5-1726-4179-8f19-469edfac57de) | 
+| **Dark Theme**  | ![d_1](https://github.com/user-attachments/assets/533bd691-8610-49e4-a2e9-665d3dbfb246)   |  ![d_3](https://github.com/user-attachments/assets/09004b89-f14d-4610-a388-a18a577ee400)  | ![d_4](https://github.com/user-attachments/assets/82fbdfaa-9f43-4308-83c2-020b50525e3f)   |  ![d_5](https://github.com/user-attachments/assets/3711488b-617f-413d-b9bc-97f6da8c5d61) | ![d_6](https://github.com/user-attachments/assets/2b5bea9b-a600-47fe-b158-19ddb810005d)
+   |    |    |  
+
 
 ---
 
 ## 📺 App Video
 
-_(Demo video showcasing the app in action goes here)_
+
+https://github.com/user-attachments/assets/e656e31d-42ae-4b56-a2f0-ae0b6ab1dbab
+
+
+
 
 ---
 
@@ -94,7 +109,10 @@ _(Demo video showcasing the app in action goes here)_
 
 ### 📱 Download APK
 
-[![Download](https://img.shields.io/badge/GitHub-100000?logo=github&logoColor=white)]()
+- [![Download](https://img.shields.io/badge/GitHub-100000?logo=github&logoColor=white)](https://github.com/HusseinElbhrawy/ClimaX/releases/tag/v1.0.0%2B1)
+
+- 🔻 [MediaFire](https://www.mediafire.com/file/g2ajgzetbo0oddk/app-release.apk/file)
+
 
 🚀 **Happy Coding!** 🎉
 
