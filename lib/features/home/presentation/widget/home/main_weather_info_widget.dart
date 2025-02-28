@@ -1,4 +1,3 @@
-import 'package:climax/core/utils/app_assets.dart';
 import 'package:climax/core/utils/app_colors.dart';
 import 'package:climax/features/home/logic/home/home_cubit.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +15,8 @@ class MainWeatherInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var currentWeather = context.read<HomeCubit>().state.currentWeather;
+    var cubit = context.read<HomeCubit>();
+    var currentWeather = cubit.state.currentWeather;
     return Padding(
       padding: EdgeInsets.only(bottom: 32.h),
       child: Material(
@@ -44,13 +44,12 @@ class MainWeatherInfoWidget extends StatelessWidget {
                   status: currentWeather.weather.first.main,
                 ),
               ),
-
-              // Todo: Change Image Depend on Weather.main
               PositionedDirectional(
                 top: -75.h,
                 start: 16.w,
-                child: const MainInfoWeatherDataStatusLogoWidget(
-                  imagePath: AppImageAssets.heavyCloud,
+                child: MainInfoWeatherDataStatusLogoWidget(
+                  imagePath:
+                      cubit.getWeatherImage(currentWeather.weather.first.main),
                 ),
               ),
             ],

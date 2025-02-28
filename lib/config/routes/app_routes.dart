@@ -45,8 +45,8 @@ class AppRoutes {
         );
       case Routes.weatherDetailsRoute:
         return CupertinoPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => serviceLocator<HomeCubit>(),
+          builder: (_) => BlocProvider.value(
+            value: serviceLocator<HomeCubit>(),
             child: const WeatherDetailsScreen(),
           ),
           settings: routeSettings,

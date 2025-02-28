@@ -20,6 +20,7 @@ class HomeLoadedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentWeather = context.read<HomeCubit>().state.currentWeather;
     return Scaffold(
       appBar: const HomeAppBarWidget(),
       body: LiquidPullToRefresh(
@@ -48,7 +49,11 @@ class HomeLoadedWidget extends StatelessWidget {
               const CustomTextDateWidget(),
               32.verticalSpace,
               const MainWeatherInfoWidget(),
-              const WeatherSecondaryWidget(),
+              WeatherSecondaryWidget(
+                humidity: currentWeather!.main.humidity.toString(),
+                windSpeed: currentWeather.wind.speed.toString(),
+                maxTemp: currentWeather.main.tempMax.toString(),
+              ),
               16.verticalSpace,
               const TodayAndNextDaysButtonWidget(),
               const OtherWeatherDaysWidget(),

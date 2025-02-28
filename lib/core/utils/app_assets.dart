@@ -16,6 +16,8 @@ class AppImageAssets {
   static const String clear = '$_imagePath/clear.png';
   static const String lightCloud = '$_imagePath/light_cloud.png';
   static const String heavyRain = '$_imagePath/heavy_rain.png';
+  static const String thunderstorm = '$_imagePath/thunderstorm.png';
+  static const String snow = '$_imagePath/snow.png';
 }
 
 class AppSvgAssets {

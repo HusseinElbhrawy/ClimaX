@@ -12,6 +12,7 @@ class HomeState extends Equatable {
     this.getCurrentWeatherErrorMessage,
     this.getTheNextFiveDaysWeatherErrorMessage,
     this.nextFiveDaysWeather,
+    this.currentSelectedDayIndex = 0,
   });
 
   //* Grouping Current Weather States
@@ -24,6 +25,9 @@ class HomeState extends Equatable {
   final String? getTheNextFiveDaysWeatherErrorMessage;
   final List<WeatherModel?>? nextFiveDaysWeather;
 
+  //* Weather Details
+  final int currentSelectedDayIndex;
+
   @override
   List<Object?> get props {
     return [
@@ -33,6 +37,7 @@ class HomeState extends Equatable {
       getTheNextFiveDaysWeatherStatus,
       getTheNextFiveDaysWeatherErrorMessage,
       nextFiveDaysWeather,
+      currentSelectedDayIndex,
     ];
   }
 
@@ -43,6 +48,7 @@ class HomeState extends Equatable {
     RequestStatus? getTheNextFiveDaysWeatherStatus,
     String? getTheNextFiveDaysWeatherErrorMessage,
     List<WeatherModel?>? nextFiveDaysWeather,
+    int? currentSelectedDayIndex,
   }) {
     return HomeState(
       getCurrentWeatherStatus:
@@ -56,6 +62,8 @@ class HomeState extends Equatable {
           getTheNextFiveDaysWeatherErrorMessage ??
               this.getTheNextFiveDaysWeatherErrorMessage,
       nextFiveDaysWeather: nextFiveDaysWeather ?? this.nextFiveDaysWeather,
+      currentSelectedDayIndex:
+          currentSelectedDayIndex ?? this.currentSelectedDayIndex,
     );
   }
 }

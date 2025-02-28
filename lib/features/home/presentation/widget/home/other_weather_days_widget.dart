@@ -34,6 +34,7 @@ class _OtherWeatherDaysWidgetState extends State<OtherWeatherDaysWidget> {
         setState(
           () {
             currentSelectedItemIndex = newIndex;
+            context.read<HomeCubit>().updateCurrentSelectedDayIndex(newIndex);
           },
         );
       }
@@ -75,7 +76,8 @@ class _OtherWeatherDaysWidgetState extends State<OtherWeatherDaysWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final currentHomeCubit = context.read<HomeCubit>().state;
+    final currentHomeCubit = context.read<HomeCubit>();
+    final currentHomeState = context.read<HomeCubit>().state;
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
@@ -90,10 +92,16 @@ class _OtherWeatherDaysWidgetState extends State<OtherWeatherDaysWidget> {
                 textColor: _getTextColor(index),
                 dayName: getNextDays()[index],
                 temp: index == 0
-                    ? currentHomeCubit.currentWeather!.main.temp
+                    ? currentHomeState.currentWeather!.main.temp
                         .toStringAsFixed(1)
-                    : currentHomeCubit.nextFiveDaysWeather![index]!.main.temp
+                    : currentHomeState.nextFiveDaysWeather![index]!.main.temp
                         .toStringAsFixed(1),
+                image: currentHomeCubit.getWeatherImage(
+                  index != 0
+                      ? currentHomeState
+                          .nextFiveDaysWeather![index]!.weather.first.main
+                      : currentHomeState.currentWeather!.weather.first.main,
+                ),
               ),
             );
           },

@@ -2,17 +2,20 @@ import 'package:climax/core/utils/app_assets.dart';
 import 'package:climax/features/home/data/models/weather_secondary_info_model.dart';
 import 'package:climax/features/home/presentation/widget/home/weather_secondary_info_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../logic/home/home_cubit.dart';
-
 class WeatherSecondaryWidget extends StatelessWidget {
-  const WeatherSecondaryWidget({super.key});
-
+  const WeatherSecondaryWidget(
+      {super.key,
+      required this.windSpeed,
+      required this.humidity,
+      required this.maxTemp});
+  final String windSpeed;
+  final String humidity;
+  final String maxTemp;
   @override
   Widget build(BuildContext context) {
-    var currentWeather = context.read<HomeCubit>().state.currentWeather;
+    // var currentWeather = context.read<HomeCubit>().state.currentWeather;
 
     return SizedBox(
       width: double.infinity,
@@ -24,21 +27,24 @@ class WeatherSecondaryWidget extends StatelessWidget {
             model: WeatherSecondaryInfoModel(
               imagePath: AppImageAssets.windSpeed,
               title: 'Wind Speed',
-              value: '${currentWeather!.wind.speed} km/h',
+              // value: '${currentWeather!.wind.speed} km/h',
+              value: '$windSpeed km/h',
             ),
           ),
           WeatherSecondaryInfoWidget(
             model: WeatherSecondaryInfoModel(
               imagePath: AppImageAssets.humidity,
               title: 'Humidity',
-              value: '${currentWeather.main.humidity}',
+              // value: '${currentWeather.main.humidity}',
+              value: humidity,
             ),
           ),
           WeatherSecondaryInfoWidget(
             model: WeatherSecondaryInfoModel(
               imagePath: AppImageAssets.maxTemp,
               title: 'Max Temp',
-              value: '${currentWeather.main.tempMax}°C',
+              // value: '${currentWeather.main.tempMax}°C',
+              value: '$maxTemp°C',
             ),
           ),
         ],

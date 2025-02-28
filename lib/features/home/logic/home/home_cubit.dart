@@ -1,5 +1,6 @@
 import 'package:climax/core/enums/request_state.dart';
 import 'package:climax/core/logger/logs.dart';
+import 'package:climax/core/utils/app_assets.dart';
 import 'package:climax/features/home/data/repositories/home_repository.dart';
 import 'package:climax/features/home/logic/home/home_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,10 +39,12 @@ class HomeCubit extends Cubit<HomeState> {
 
   Position? _handleLocationFetchingErrors(String errorMessage) {
     kLogger.red(errorMessage);
-    emit(state.copyWith(
-      getCurrentWeatherStatus: RequestStatus.error,
-      getCurrentWeatherErrorMessage: errorMessage,
-    ));
+    emit(
+      state.copyWith(
+        getCurrentWeatherStatus: RequestStatus.error,
+        getCurrentWeatherErrorMessage: errorMessage,
+      ),
+    );
     return null;
   }
 
@@ -53,13 +56,17 @@ class HomeCubit extends Cubit<HomeState> {
     if (position == null) return;
 
     final result = await _homeRepository.getCurrentWeather(
-        position.latitude, position.longitude);
+      position.latitude,
+      position.longitude,
+    );
     result.fold(
       (failure) => _emitWeatherError(failure.message),
-      (weather) => emit(state.copyWith(
-        getCurrentWeatherStatus: RequestStatus.success,
-        currentWeather: weather,
-      )),
+      (weather) => emit(
+        state.copyWith(
+          getCurrentWeatherStatus: RequestStatus.success,
+          currentWeather: weather,
+        ),
+      ),
     );
   }
 
@@ -87,13 +94,47 @@ class HomeCubit extends Cubit<HomeState> {
 
   void _emitWeatherError(String message) {
     kLogger.red('Weather Fetch Error: $message');
-    emit(state.copyWith(
-      getCurrentWeatherStatus: RequestStatus.error,
-      getCurrentWeatherErrorMessage: message,
-    ));
+    emit(
+      state.copyWith(
+        getCurrentWeatherStatus: RequestStatus.error,
+        getCurrentWeatherErrorMessage: message,
+      ),
+    );
   }
 
   ///* Get Current Date
   String get currentDate =>
       DateFormat('EEEE, d MMM yyyy').format(DateTime.now());
+
+  ///* update current selected day index
+  void updateCurrentSelectedDayIndex(int index) {
+    emit(state.copyWith(currentSelectedDayIndex: index));
+  }
+
+  @override
+  Future<void> close() {
+    kLogger.red('Home Cubit Closed');
+    return super.close();
+  }
+
+  Map<String, String> weatherStatusImages = {
+    "clear": AppImageAssets.clear,
+    "clouds": AppImageAssets.lightCloud,
+    "scattered": AppImageAssets.heavyCloud,
+    "shower": "",
+    "rain": AppImageAssets.lightRain,
+    "thunderstorm": AppImageAssets.thunderstorm,
+    "snow": AppImageAssets.snow,
+    "mist": AppImageAssets.heavyCloud,
+    "default": AppImageAssets.clear,
+  };
+
+  String getWeatherImage(String apiStatus) {
+    return weatherStatusImages.entries
+        .firstWhere(
+          (entry) => apiStatus.toLowerCase().contains(entry.key.toLowerCase()),
+          orElse: () => const MapEntry("default", AppImageAssets.clear),
+        )
+        .value;
+  }
 }

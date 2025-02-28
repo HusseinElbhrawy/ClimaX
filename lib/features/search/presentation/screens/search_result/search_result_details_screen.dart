@@ -33,7 +33,11 @@ class SearchResultDetailsScreen extends StatelessWidget {
             const CustomTextDateWidget(),
             32.verticalSpace,
             const MainWeatherInfoWidget(),
-            const WeatherSecondaryWidget(),
+            const WeatherSecondaryWidget(
+              humidity: '12',
+              maxTemp: '12',
+              windSpeed: '12',
+            ),
           ],
         ),
       ),

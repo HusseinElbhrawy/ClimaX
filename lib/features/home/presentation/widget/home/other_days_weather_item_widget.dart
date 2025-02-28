@@ -1,4 +1,3 @@
-import 'package:climax/core/utils/app_assets.dart';
 import 'package:climax/core/utils/constant.dart';
 import 'package:climax/core/utils/style_manager.dart';
 import 'package:flutter/material.dart';
@@ -12,12 +11,14 @@ class OtherDaysWeatherItemWidget extends StatelessWidget {
     required this.textColor,
     required this.dayName,
     required this.temp,
+    required this.image,
   });
   final VoidCallback onTap;
   final Color bgColor;
   final Color textColor;
   final String dayName;
   final String temp;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +45,8 @@ class OtherDaysWeatherItemWidget extends StatelessWidget {
                 ),
               ),
               Image.asset(
-                AppImageAssets.heavyCloud,
+                // AppImageAssets.heavyCloud,
+                image,
                 height: 24.h,
               ),
               Text(

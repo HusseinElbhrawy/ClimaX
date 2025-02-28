@@ -27,7 +27,7 @@ Future<void> initDI() async {
 
 Future<void> _setUpBloc() async {
   if (!serviceLocator.isRegistered<HomeCubit>()) {
-    serviceLocator.registerFactory<HomeCubit>(
+    serviceLocator.registerLazySingleton<HomeCubit>(
       () => HomeCubit(serviceLocator()),
     );
   }
@@ -108,8 +108,8 @@ Future<void> _setUpExternal() async {
         requestBody: true,
         requestHeader: true,
         error: true,
-        responseBody: true,
-        responseHeader: true,
+        responseBody: false,
+        responseHeader: false,
       ),
     );
   }
