@@ -1,17 +1,21 @@
-import 'package:climax/core/utils/app_assets.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:climax/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'main_info_weather_data_status_logo_widget.dart';
 import 'main_info_weather_data_status_widget.dart';
 import 'main_info_weather_data_temp_text_widget.dart';
 
 class MainWeatherInfoWidget extends StatelessWidget {
   const MainWeatherInfoWidget({
     super.key,
+    required this.temp,
+    required this.imagePath,
+    required this.status,
   });
-
+  final String temp;
+  final String imagePath;
+  final String status;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -30,19 +34,30 @@ class MainWeatherInfoWidget extends StatelessWidget {
               PositionedDirectional(
                 top: 36.h,
                 end: 22.w,
-                child: MainInfoWeatherDataTempTextWidget(temp: '15'),
+                child: MainInfoWeatherDataTempTextWidget(
+                  temp: temp,
+                  // temp: currentWeather!.main.temp.toStringAsFixed(1),
+                ),
               ),
               PositionedDirectional(
                 bottom: 28.h,
                 start: 16.w,
-                child: MainInfoWeatherDataStatusWidget(status: 'Heavy Cloudy'),
+                child: MainInfoWeatherDataStatusWidget(
+                  // status: currentWeather.weather.first.main,
+                  status: status,
+                ),
               ),
               PositionedDirectional(
                 top: -75.h,
                 start: 16.w,
-                child: MainInfoWeatherDataStatusLogoWidget(
-                  imagePath: AppImageAssets.heavyCloud,
-                ),
+                child: CachedNetworkImage(imageUrl: imagePath),
+                // child: Image.network(
+                //   imagePath,
+                // ),
+                // child: MainInfoWeatherDataStatusLogoWidget(
+                //   imagePath: imagePath,
+                //   // cubit.getWeatherImage(currentWeather.weather.first.main),
+                // ),
               ),
             ],
           ),

@@ -1,7 +1,9 @@
+// import 'package:climax/config/routes/app_routes.dart';
 import 'package:climax/config/routes/app_routes.dart';
 import 'package:climax/config/theme/theme_provider.dart';
 import 'package:climax/core/utils/app_colors.dart';
 import 'package:climax/core/utils/media_query_values.dart';
+// import 'package:climax/core/utils/media_query_values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -23,7 +25,7 @@ class HomeAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () {
+          onPressed: () async {
             context.navigateTo(Routes.searchRoute);
           },
           icon: const Icon(

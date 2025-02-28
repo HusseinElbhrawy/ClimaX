@@ -1,10 +1,14 @@
 import 'package:climax/config/routes/app_routes.dart';
+import 'package:climax/core/api/end_point.dart';
 import 'package:climax/core/logger/logs.dart';
 import 'package:climax/core/utils/app_colors.dart';
 import 'package:climax/core/utils/media_query_values.dart';
+import 'package:climax/features/home/logic/home/home_cubit.dart';
 import 'package:climax/features/home/presentation/widget/home/other_days_weather_item_widget.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 class OtherWeatherDaysWidget extends StatefulWidget {
   const OtherWeatherDaysWidget({
@@ -28,9 +32,12 @@ class _OtherWeatherDaysWidgetState extends State<OtherWeatherDaysWidget> {
       if (newIndex > 0 && widget.isComeFromHomeScree == false) {
         context.navigateTo(Routes.weatherDetailsRoute);
       } else {
-        setState(() {
-          currentSelectedItemIndex = newIndex;
-        });
+        setState(
+          () {
+            currentSelectedItemIndex = newIndex;
+            context.read<HomeCubit>().updateCurrentSelectedDayIndex(newIndex);
+          },
+        );
       }
     }
 
@@ -59,13 +66,23 @@ class _OtherWeatherDaysWidgetState extends State<OtherWeatherDaysWidget> {
         : AppColors.white;
   }
 
+  List<String> getNextDays() {
+    return List.generate(
+      6,
+      (index) => DateFormat('EEE')
+          .format(DateTime.now().add(Duration(days: index)))
+          .toString(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final currentHomeState = context.read<HomeCubit>().state;
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
         children: List.generate(
-          7,
+          5,
           (index) {
             return Padding(
               padding: EdgeInsetsDirectional.only(end: 12.w),
@@ -73,6 +90,15 @@ class _OtherWeatherDaysWidgetState extends State<OtherWeatherDaysWidget> {
                 bgColor: _getBgColor(index),
                 onTap: () => _updateIndex(index),
                 textColor: _getTextColor(index),
+                dayName: getNextDays()[index],
+                temp: index == 0
+                    ? currentHomeState.currentWeather!.main.temp
+                        .toStringAsFixed(1)
+                    : currentHomeState.nextFiveDaysWeather![index]!.main.temp
+                        .toStringAsFixed(1),
+                image: index == 0
+                    ? "${EndPoint.baseImageURL}/${currentHomeState.currentWeather!.weather.first.icon.trim()}@4x.png"
+                    : "${EndPoint.baseImageURL}/${currentHomeState.nextFiveDaysWeather![index]!.weather.first.icon.trim()}@4x.png",
               ),
             );
           },

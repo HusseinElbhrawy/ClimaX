@@ -4,7 +4,9 @@ import 'package:climax/core/utils/media_query_values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../app/injector.dart';
 import '../../../../config/routes/app_routes.dart';
+import '../../../onboarding/logic/on_barding_service.dart';
 import '../widget/app_logo_widget.dart';
 import '../widget/custom_app_name_with_animation_widget.dart';
 
@@ -23,9 +25,18 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     _timer = Timer(
       const Duration(seconds: 2),
-      () => context.navigateToWithReplacementAndClearStack(
-        Routes.onboardingRoute,
-      ),
+      () {
+        final isSkipped = serviceLocator<OnBardingService>().isOnBoardingSeen();
+        if (isSkipped) {
+          context.navigateToWithReplacementAndClearStack(
+            Routes.homeRoute,
+          );
+        } else {
+          context.navigateToWithReplacementAndClearStack(
+            Routes.onboardingRoute,
+          );
+        }
+      },
     );
   }
 

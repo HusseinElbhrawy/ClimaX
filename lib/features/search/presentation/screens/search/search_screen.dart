@@ -5,10 +5,10 @@ import 'package:climax/core/widgets/custom_leading_back_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../widget/search_screen/custom_search_screen_title_widget.dart';
-import '../../widget/search_screen/search_form_widget.dart';
-import '../../widget/search_screen/search_results_widget.dart';
-import '../../widget/search_screen/search_search_screen_sub_title_widget.dart';
+import '../../widget/custom_search_screen_title_widget.dart';
+import '../../widget/search_form_widget.dart';
+import '../../widget/search_search_screen_sub_title_widget.dart';
+import '../search_result/search_result_details_screen.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -22,7 +22,8 @@ class SearchScreen extends StatelessWidget {
           color: context.defaultTextColor,
         ),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         padding: EdgeInsets.symmetric(
           horizontal: AppConstant.defaultPaddingValue.w,
         ),
@@ -32,7 +33,8 @@ class SearchScreen extends StatelessWidget {
             const CustomSearchScreenTitleWidget(),
             const SearchSearchScreenSubTitleWidget(),
             const SearchFormWidget(),
-            const SearchResultsWidget(),
+            40.verticalSpace,
+            const SearchResultWidget(),
           ],
         ),
       ),

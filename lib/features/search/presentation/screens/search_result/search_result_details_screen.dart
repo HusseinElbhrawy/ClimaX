@@ -1,42 +1,45 @@
-import 'package:climax/core/utils/constant.dart';
+import 'package:climax/core/enums/request_state.dart';
 import 'package:climax/core/utils/media_query_values.dart';
-import 'package:climax/core/widgets/custom_leading_back_button_widget.dart';
-import 'package:climax/features/home/presentation/widget/home/custom_text_date_widget.dart';
-import 'package:climax/features/home/presentation/widget/home/main_weather_info_widget.dart';
-import 'package:climax/features/home/presentation/widget/home/weather_secondary_widget.dart';
+import 'package:climax/core/utils/style_manager.dart';
+import 'package:climax/core/widgets/custom_error_widget.dart';
+import 'package:climax/core/widgets/custom_loading_widget.dart';
+import 'package:climax/features/search/logic/search_cubit.dart';
+import 'package:climax/features/search/logic/search_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SearchResultDetailsScreen extends StatelessWidget {
-  const SearchResultDetailsScreen({super.key});
+import '../../widget/search_result_loaded_widget.dart';
+
+class SearchResultWidget extends StatelessWidget {
+  const SearchResultWidget({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: CustomLeadingBackButtonWidget(
-          color: context.defaultTextColor,
-        ),
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsetsDirectional.only(
-          start: AppConstant.defaultPaddingValue.w,
-          end: AppConstant.defaultPaddingValue.w,
-          bottom: (AppConstant.defaultPaddingValue.h / 2),
-        ),
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: 12.h,
-          children: [
-            const LocationTextWidget(),
-            const CustomTextDateWidget(),
-            32.verticalSpace,
-            const MainWeatherInfoWidget(),
-            const WeatherSecondaryWidget(),
-          ],
-        ),
-      ),
+    return BlocBuilder<SearchCubit, SearchState>(
+      builder: (context, state) {
+        switch (state.searchRequestStatus) {
+          case RequestStatus.initial:
+            return Center(
+              child: Text(
+                'Please enter search name to search',
+                style: getMediumStyle(
+                  color: context.defaultTextColor,
+                ),
+              ),
+            );
+          case RequestStatus.loading:
+            return const CustomLoadingWidget();
+          case RequestStatus.success:
+            return const SearchResultLoadedWidget();
+          case RequestStatus.error:
+            return CustomErrorWidget(
+              errorMessage: state.searchErrorMessage!,
+              onRetry: () => context.read<SearchCubit>().searchWithCityName(),
+            );
+        }
+      },
     );
   }
 }

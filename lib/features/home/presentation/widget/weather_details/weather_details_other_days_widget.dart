@@ -18,58 +18,49 @@ class WeatherDetailsOtherDaysWidget extends StatelessWidget {
       padding: EdgeInsets.symmetric(
         horizontal: AppConstant.defaultPaddingValue.w,
       ),
-      child: ListView.builder(
-        clipBehavior: Clip.antiAliasWithSaveLayer,
-        physics: NeverScrollableScrollPhysics(),
-        itemCount: 7,
-        itemBuilder: (context, index) => Card(
-          shadowColor: Colors.black,
-          elevation: 2.sp,
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: AppConstant.defaultPaddingValue.w,
-              vertical: (AppConstant.defaultPaddingValue.h) / 2,
-            ),
-            child: Row(
-              children: [
-                Expanded(child: Text('2 May , Friday')),
-                Expanded(
-                  child: Center(
-                    child: Text.rich(
-                      TextSpan(
-                        children: [
-                          TextSpan(
-                            text: '18/',
-                            style: TextStyle(
-                              fontSize: 24.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          TextSpan(
-                            text: '8',
-                            style: TextStyle(),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: AppConstant.defaultPaddingValue.w,
+          vertical: (AppConstant.defaultPaddingValue.h) / 2,
+        ),
+        child: Row(
+          children: [
+            const Expanded(child: Text('2 May , Friday')),
+            Expanded(
+              child: Center(
+                child: Text.rich(
+                  TextSpan(
                     children: [
-                      MainInfoWeatherDataStatusLogoWidget(
-                        imagePath: AppImageAssets.heavyCloud,
-                        height: 40.h,
-                        width: 40.w,
+                      TextSpan(
+                        text: '18/',
+                        style: TextStyle(
+                          fontSize: 24.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                      Text('Heavy Cloudy'),
+                      const TextSpan(
+                        text: '8',
+                        style: TextStyle(),
+                      ),
                     ],
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  MainInfoWeatherDataStatusLogoWidget(
+                    imagePath: AppImageAssets.heavyCloud,
+                    height: 40.h,
+                    width: 40.w,
+                  ),
+                  const Text('Heavy Cloudy'),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

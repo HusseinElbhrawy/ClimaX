@@ -54,7 +54,7 @@ class OnBoardingItemWidget extends StatelessWidget {
               color: context.defaultTextColor,
             ),
           ),
-          Spacer(),
+          const Spacer(),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: item.buttonColor,
