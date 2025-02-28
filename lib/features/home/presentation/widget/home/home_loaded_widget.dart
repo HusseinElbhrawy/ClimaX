@@ -30,8 +30,8 @@ class HomeLoadedWidget extends StatelessWidget {
         onRefresh: () async {
           await Future.wait(
             [
-              context.read<HomeCubit>().getCurrentWeather(),
-              context.read<HomeCubit>().getNextFiveDaysWeather(),
+              context.read<HomeCubit>().fetchWeatherData(),
+              // context.read<HomeCubit>().getNextFiveDaysWeather(),
             ],
           );
         },

@@ -5,6 +5,7 @@ import 'package:climax/features/home/data/datasources/home_local_data_source.dar
 import 'package:climax/features/home/data/datasources/home_remote_data_source.dart';
 import 'package:climax/features/home/data/repositories/home_repository.dart';
 import 'package:climax/features/home/logic/home/home_cubit.dart';
+import 'package:climax/features/onboarding/logic/on_barding_service.dart';
 import 'package:climax/features/search/data/datasources/search_remote_data_source.dart';
 import 'package:climax/features/search/data/repositories/search_repository.dart';
 import 'package:climax/features/search/logic/search_cubit.dart';
@@ -39,6 +40,11 @@ Future<void> _setUpBloc() async {
   if (!serviceLocator.isRegistered<SearchCubit>()) {
     serviceLocator.registerFactory<SearchCubit>(
       () => SearchCubit(serviceLocator()),
+    );
+  }
+  if (!serviceLocator.isRegistered<OnBardingService>()) {
+    serviceLocator.registerFactory<OnBardingService>(
+      () => OnBardingService(serviceLocator()),
     );
   }
 }

@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 
 import '../../../../core/enums/request_state.dart';
@@ -11,7 +10,7 @@ class HomeState extends Equatable {
     this.currentWeather,
     this.getCurrentWeatherErrorMessage,
     this.getTheNextFiveDaysWeatherErrorMessage,
-    this.nextFiveDaysWeather,
+    this.nextFiveDaysWeather = const [],
     this.currentSelectedDayIndex = 0,
   });
 
@@ -23,7 +22,7 @@ class HomeState extends Equatable {
   //* Grouping Next Forecast States
   final RequestStatus getTheNextFiveDaysWeatherStatus;
   final String? getTheNextFiveDaysWeatherErrorMessage;
-  final List<WeatherModel?>? nextFiveDaysWeather;
+  final List<WeatherModel?> nextFiveDaysWeather;
 
   //* Weather Details
   final int currentSelectedDayIndex;
@@ -67,22 +66,3 @@ class HomeState extends Equatable {
     );
   }
 }
-
-//  * Grouping Next Forecast States
-// class GetNextForecastWeatherLoading extends HomeState {}
-
-// class GetNextForecastWeatherLoaded extends HomeState {
-//   final WeatherModel forecast;
-//   const GetNextForecastWeatherLoaded(this.forecast);
-
-//   @override
-//   List<Object?> get props => [forecast];
-// }
-
-// class GetNextForecastWeatherLoadError extends HomeState {
-//   final String message;
-//   const GetNextForecastWeatherLoadError(this.message);
-
-//   @override
-//   List<Object?> get props => [message];
-// }

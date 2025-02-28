@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:climax/core/utils/constant.dart';
 import 'package:climax/core/utils/style_manager.dart';
 import 'package:flutter/material.dart';
@@ -44,9 +45,9 @@ class OtherDaysWeatherItemWidget extends StatelessWidget {
                   color: textColor,
                 ),
               ),
-              Image.network(
+              CachedNetworkImage(
                 // AppImageAssets.heavyCloud,
-                image,
+                imageUrl: image,
                 height: 24.h,
               ),
               Text(

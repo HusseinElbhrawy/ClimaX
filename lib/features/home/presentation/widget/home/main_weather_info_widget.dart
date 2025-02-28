@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:climax/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -49,9 +50,10 @@ class MainWeatherInfoWidget extends StatelessWidget {
               PositionedDirectional(
                 top: -75.h,
                 start: 16.w,
-                child: Image.network(
-                  imagePath,
-                ),
+                child: CachedNetworkImage(imageUrl: imagePath),
+                // child: Image.network(
+                //   imagePath,
+                // ),
                 // child: MainInfoWeatherDataStatusLogoWidget(
                 //   imagePath: imagePath,
                 //   // cubit.getWeatherImage(currentWeather.weather.first.main),

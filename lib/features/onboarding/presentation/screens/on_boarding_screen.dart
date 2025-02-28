@@ -35,7 +35,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         actions: [
-          OnBoardingSkipButtonWidget(),
+          const OnBoardingSkipButtonWidget(),
         ],
       ),
       body: LiquidSwipe(
@@ -44,7 +44,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         enableSideReveal: true,
         onPageChangeCallback: (activePageIndex) =>
             _updateIndex(activePageIndex),
-        slideIconWidget: Icon(Icons.navigate_before_sharp),
+        slideIconWidget: const Icon(Icons.navigate_before_sharp),
         pages: AppConstant.onBoardingItems(context, liquidController)
             .map((item) => OnBoardingItemWidget(item: item))
             .toList(),

@@ -36,9 +36,8 @@ class AppRoutes {
       case Routes.homeRoute:
         return CupertinoPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => serviceLocator<HomeCubit>()
-              ..getCurrentWeather()
-              ..getNextFiveDaysWeather(),
+            create: (context) =>
+                serviceLocator<HomeCubit>()..fetchWeatherData(),
             child: const HomeScreen(),
           ),
           settings: routeSettings,
@@ -66,10 +65,6 @@ class AppRoutes {
               child: const SearchScreen(),
             );
           },
-          // builder: (_) => BlocProvider.value(
-          //   value: serviceLocator<HomeCubit>(),
-
-          // ),
           settings: routeSettings,
         );
       // case Routes.searchResultDetailsRoute:

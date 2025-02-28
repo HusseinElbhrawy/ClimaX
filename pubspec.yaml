@@ -53,6 +53,7 @@ dependencies:
   geolocator: ^13.0.2
   intl: ^0.20.2
   liquid_pull_to_refresh: ^3.0.1
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:
