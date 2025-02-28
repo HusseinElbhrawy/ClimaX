@@ -2,48 +2,46 @@ import 'package:climax/core/utils/app_assets.dart';
 import 'package:climax/features/home/data/models/weather_secondary_info_model.dart';
 import 'package:climax/features/home/presentation/widget/home/weather_secondary_info_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class WeatherSecondaryWidget extends StatefulWidget {
+import '../../../logic/home/home_cubit.dart';
+
+class WeatherSecondaryWidget extends StatelessWidget {
   const WeatherSecondaryWidget({super.key});
 
   @override
-  State<WeatherSecondaryWidget> createState() => _WeatherSecondaryWidgetState();
-}
-
-class _WeatherSecondaryWidgetState extends State<WeatherSecondaryWidget> {
-  final List<WeatherSecondaryInfoModel> _data = [
-    WeatherSecondaryInfoModel(
-      imagePath: AppImageAssets.windSpeed,
-      title: 'Wind Speed',
-      value: '25 km/h',
-    ),
-    WeatherSecondaryInfoModel(
-      imagePath: AppImageAssets.humidity,
-      title: 'Humidity',
-      value: '65',
-    ),
-    WeatherSecondaryInfoModel(
-      imagePath: AppImageAssets.maxTemp,
-      title: 'Max Temp',
-      value: '17°C',
-    ),
-  ];
-  @override
   Widget build(BuildContext context) {
+    var currentWeather = context.read<HomeCubit>().state.currentWeather;
+
     return SizedBox(
       width: double.infinity,
       child: Row(
-        // alignment: WrapAlignment.spaceAround,
         spacing: 12.w,
-        // runSpacing: 16.h,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: List.generate(
-          3,
-          (index) {
-            return WeatherSecondaryInfoWidget(model: _data[index]);
-          },
-        ),
+        children: [
+          WeatherSecondaryInfoWidget(
+            model: WeatherSecondaryInfoModel(
+              imagePath: AppImageAssets.windSpeed,
+              title: 'Wind Speed',
+              value: '${currentWeather!.wind.speed} km/h',
+            ),
+          ),
+          WeatherSecondaryInfoWidget(
+            model: WeatherSecondaryInfoModel(
+              imagePath: AppImageAssets.humidity,
+              title: 'Humidity',
+              value: '${currentWeather.main.humidity}',
+            ),
+          ),
+          WeatherSecondaryInfoWidget(
+            model: WeatherSecondaryInfoModel(
+              imagePath: AppImageAssets.maxTemp,
+              title: 'Max Temp',
+              value: '${currentWeather.main.tempMax}°C',
+            ),
+          ),
+        ],
       ),
     );
     // return SizedBox(

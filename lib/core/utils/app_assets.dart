@@ -36,4 +36,6 @@ class AppLottieAssets {
   factory AppLottieAssets() => _instance;
 
   static const String loading = '$_lottiePath/loading.json';
+
+  static const String error = '$_lottiePath/error.json';
 }

@@ -1,3 +1,4 @@
+import 'package:climax/config/routes/app_routes.dart';
 import 'package:climax/core/utils/media_query_values.dart';
 import 'package:climax/core/utils/style_manager.dart';
 import 'package:flutter/material.dart';
@@ -24,10 +25,13 @@ class TodayAndNextDaysButtonWidget extends StatelessWidget {
         ),
         TextButton(
           style: TextButton.styleFrom(
-            padding: EdgeInsets.all(0),
+            padding: const EdgeInsets.all(0),
           ),
-          onPressed: () {},
-          child: Text('Next 7 days'),
+          onPressed: () {
+            //Todo: Pass the next 5 days Weather Data;
+            context.navigateTo(Routes.weatherDetailsRoute);
+          },
+          child: const Text('Next 5 days'),
         ),
       ],
     );

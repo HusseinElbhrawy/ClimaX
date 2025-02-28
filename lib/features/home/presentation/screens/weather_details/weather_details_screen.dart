@@ -14,7 +14,7 @@ class WeatherDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: WeatherDetailsAppBarWidget(),
+      appBar: const WeatherDetailsAppBarWidget(),
       backgroundColor: context.primaryColor,
       body: NestedScrollView(
         physics: const BouncingScrollPhysics(),
@@ -25,7 +25,7 @@ class WeatherDetailsScreen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(
                   horizontal: AppConstant.defaultPaddingValue.w,
                 ),
-                child: OtherWeatherDaysWidget(isComeFromHomeScree: true),
+                child: const OtherWeatherDaysWidget(isComeFromHomeScree: true),
               ),
             ),
             const SliverToBoxAdapter(

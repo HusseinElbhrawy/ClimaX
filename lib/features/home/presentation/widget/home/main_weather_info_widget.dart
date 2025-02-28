@@ -1,6 +1,8 @@
 import 'package:climax/core/utils/app_assets.dart';
 import 'package:climax/core/utils/app_colors.dart';
+import 'package:climax/features/home/logic/home/home_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'main_info_weather_data_status_logo_widget.dart';
@@ -14,6 +16,7 @@ class MainWeatherInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var currentWeather = context.read<HomeCubit>().state.currentWeather;
     return Padding(
       padding: EdgeInsets.only(bottom: 32.h),
       child: Material(
@@ -30,17 +33,23 @@ class MainWeatherInfoWidget extends StatelessWidget {
               PositionedDirectional(
                 top: 36.h,
                 end: 22.w,
-                child: MainInfoWeatherDataTempTextWidget(temp: '15'),
+                child: MainInfoWeatherDataTempTextWidget(
+                  temp: currentWeather!.main.temp.toStringAsFixed(1),
+                ),
               ),
               PositionedDirectional(
                 bottom: 28.h,
                 start: 16.w,
-                child: MainInfoWeatherDataStatusWidget(status: 'Heavy Cloudy'),
+                child: MainInfoWeatherDataStatusWidget(
+                  status: currentWeather.weather.first.main,
+                ),
               ),
+
+              // Todo: Change Image Depend on Weather.main
               PositionedDirectional(
                 top: -75.h,
                 start: 16.w,
-                child: MainInfoWeatherDataStatusLogoWidget(
+                child: const MainInfoWeatherDataStatusLogoWidget(
                   imagePath: AppImageAssets.heavyCloud,
                 ),
               ),

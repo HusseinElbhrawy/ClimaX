@@ -1,9 +1,13 @@
+import 'package:climax/app/injector.dart';
 import 'package:climax/config/routes/app_routes.dart';
 import 'package:climax/core/utils/app_assets.dart';
 import 'package:climax/core/utils/media_query_values.dart';
 import 'package:climax/features/onboarding/data/models/on_boarding_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
+
+final kDotEnv = serviceLocator<DotEnv>();
 
 class AppConstant {
   const AppConstant._();

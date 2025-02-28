@@ -43,7 +43,7 @@ class CustomWeatherDetailsMainInfoWidget extends StatelessWidget {
             PositionedDirectional(
               top: 36.h,
               end: 22.w,
-              child: MainInfoWeatherDataTempTextWidget(temp: '15'),
+              child: const MainInfoWeatherDataTempTextWidget(temp: '15'),
             ),
             PositionedDirectional(
               bottom: 28.h,
@@ -55,8 +55,9 @@ class CustomWeatherDetailsMainInfoWidget extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   spacing: 16.h,
                   children: [
-                    MainInfoWeatherDataStatusWidget(status: 'Heavy Cloudy'),
-                    WeatherSecondaryWidget(),
+                    const MainInfoWeatherDataStatusWidget(
+                        status: 'Heavy Cloudy'),
+                    const WeatherSecondaryWidget(),
                   ],
                 ),
               ),
@@ -64,7 +65,7 @@ class CustomWeatherDetailsMainInfoWidget extends StatelessWidget {
             PositionedDirectional(
               top: -75.h,
               start: 16.w,
-              child: MainInfoWeatherDataStatusLogoWidget(
+              child: const MainInfoWeatherDataStatusLogoWidget(
                 imagePath: AppImageAssets.heavyCloud,
               ),
             ),

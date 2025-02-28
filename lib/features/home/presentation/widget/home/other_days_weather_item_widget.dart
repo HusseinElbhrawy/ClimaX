@@ -10,10 +10,14 @@ class OtherDaysWeatherItemWidget extends StatelessWidget {
     required this.onTap,
     required this.bgColor,
     required this.textColor,
+    required this.dayName,
+    required this.temp,
   });
   final VoidCallback onTap;
   final Color bgColor;
   final Color textColor;
+  final String dayName;
+  final String temp;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +38,7 @@ class OtherDaysWeatherItemWidget extends StatelessWidget {
             spacing: 12.h,
             children: [
               Text(
-                '15C',
+                '$temp °C',
                 style: getMediumStyle(
                   color: textColor,
                 ),
@@ -44,7 +48,7 @@ class OtherDaysWeatherItemWidget extends StatelessWidget {
                 height: 24.h,
               ),
               Text(
-                'Mon',
+                dayName,
                 style: getMediumStyle(
                   color: textColor,
                 ),

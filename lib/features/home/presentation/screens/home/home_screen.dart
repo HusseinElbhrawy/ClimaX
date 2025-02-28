@@ -1,44 +1,52 @@
-import 'package:climax/core/utils/constant.dart';
-import 'package:climax/features/home/presentation/widget/home/other_weather_days_widget.dart';
-import 'package:climax/features/home/presentation/widget/home/today_and_next_days_button_widget.dart';
+import 'package:climax/core/enums/request_state.dart';
+import 'package:climax/core/widgets/custom_error_widget.dart';
+import 'package:climax/core/widgets/custom_loading_widget.dart';
+import 'package:climax/features/home/logic/home/home_cubit.dart';
+import 'package:climax/features/home/logic/home/home_state.dart';
+import 'package:climax/features/home/presentation/widget/home/home_loaded_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../widget/home/custom_text_date_widget.dart';
-import '../../widget/home/home_app_bar_widget.dart';
-import '../../widget/home/main_weather_info_widget.dart';
-import '../../widget/home/weather_secondary_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const HomeAppBarWidget(),
-      body: SingleChildScrollView(
-        padding: EdgeInsetsDirectional.only(
-          start: AppConstant.defaultPaddingValue.w,
-          end: AppConstant.defaultPaddingValue.w,
-          bottom: (AppConstant.defaultPaddingValue.h / 2),
-        ),
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: 12.h,
-          children: [
-            const LocationTextWidget(),
-            const CustomTextDateWidget(),
-            32.verticalSpace,
-            const MainWeatherInfoWidget(),
-            const WeatherSecondaryWidget(),
-            16.verticalSpace,
-            const TodayAndNextDaysButtonWidget(),
-            const OtherWeatherDaysWidget(),
-            16.verticalSpace,
-          ],
-        ),
-      ),
+    return BlocBuilder<HomeCubit, HomeState>(
+      buildWhen: (previous, current) {
+        return previous.getCurrentWeatherStatus !=
+                current.getCurrentWeatherStatus ||
+            previous.getTheNextFiveDaysWeatherStatus !=
+                current.getTheNextFiveDaysWeatherStatus;
+      },
+      builder: (context, state) {
+        if (state.getCurrentWeatherStatus == RequestStatus.loading ||
+            state.getTheNextFiveDaysWeatherStatus == RequestStatus.loading ||
+            state.getTheNextFiveDaysWeatherStatus == RequestStatus.initial ||
+            state.getCurrentWeatherStatus == RequestStatus.initial) {
+          return const CustomLoadingWidget();
+        } else if (state.getCurrentWeatherStatus == RequestStatus.error ||
+            state.getTheNextFiveDaysWeatherStatus == RequestStatus.error) {
+          return CustomErrorWidget(
+            errorMessage: state.getCurrentWeatherErrorMessage!,
+            onRetry: () => context.read<HomeCubit>().getCurrentWeather(),
+          );
+        } else {
+          return const HomeLoadedWidget();
+        }
+        // switch (state.getCurrentWeatherStatus) {
+        //   case RequestStatus.loading:
+        //     return const CustomLoadingWidget();
+        //   case RequestStatus.initial:
+        //   case RequestStatus.success:
+        //     return const HomeLoadedWidget();
+        //   case RequestStatus.error:
+        //     return CustomErrorWidget(
+        //       errorMessage: state.getCurrentWeatherErrorMessage!,
+        //       onRetry: () => context.read<HomeCubit>().getCurrentWeather(),
+        //     );
+        // }
+      },
     );
   }
 }
