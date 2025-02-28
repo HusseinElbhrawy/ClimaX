@@ -1,4 +1,5 @@
 import 'package:climax/config/routes/app_routes.dart';
+import 'package:climax/core/api/end_point.dart';
 import 'package:climax/core/logger/logs.dart';
 import 'package:climax/core/utils/app_colors.dart';
 import 'package:climax/core/utils/media_query_values.dart';
@@ -76,7 +77,6 @@ class _OtherWeatherDaysWidgetState extends State<OtherWeatherDaysWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final currentHomeCubit = context.read<HomeCubit>();
     final currentHomeState = context.read<HomeCubit>().state;
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -96,12 +96,9 @@ class _OtherWeatherDaysWidgetState extends State<OtherWeatherDaysWidget> {
                         .toStringAsFixed(1)
                     : currentHomeState.nextFiveDaysWeather![index]!.main.temp
                         .toStringAsFixed(1),
-                image: currentHomeCubit.getWeatherImage(
-                  index != 0
-                      ? currentHomeState
-                          .nextFiveDaysWeather![index]!.weather.first.main
-                      : currentHomeState.currentWeather!.weather.first.main,
-                ),
+                image: index == 0
+                    ? "${EndPoint.baseImageURL}/${currentHomeState.currentWeather!.weather.first.icon.trim()}@4x.png"
+                    : "${EndPoint.baseImageURL}/${currentHomeState.nextFiveDaysWeather![index]!.weather.first.icon.trim()}@4x.png",
               ),
             );
           },

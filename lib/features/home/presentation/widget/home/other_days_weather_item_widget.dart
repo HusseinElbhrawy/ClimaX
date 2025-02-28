@@ -44,7 +44,7 @@ class OtherDaysWeatherItemWidget extends StatelessWidget {
                   color: textColor,
                 ),
               ),
-              Image.asset(
+              Image.network(
                 // AppImageAssets.heavyCloud,
                 image,
                 height: 24.h,

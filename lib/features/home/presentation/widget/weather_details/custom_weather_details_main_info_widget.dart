@@ -1,3 +1,4 @@
+import 'package:climax/core/api/end_point.dart';
 import 'package:climax/core/utils/app_colors.dart';
 import 'package:climax/core/utils/media_query_values.dart';
 import 'package:climax/features/home/logic/home/home_state.dart';
@@ -19,9 +20,7 @@ class CustomWeatherDetailsMainInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<HomeCubit>();
     return Container(
-      // height: 1.sh,
       margin: EdgeInsetsDirectional.only(top: 120.h),
       decoration: BoxDecoration(
         color: context.scaffoldBackgroundColor,
@@ -103,10 +102,8 @@ class CustomWeatherDetailsMainInfoWidget extends StatelessWidget {
                   top: -75.h,
                   start: 16.w,
                   child: MainInfoWeatherDataStatusLogoWidget(
-                    imagePath: cubit.getWeatherImage(
-                      state.nextFiveDaysWeather![state.currentSelectedDayIndex]!
-                          .weather[0].main,
-                    ),
+                    imagePath:
+                        "${EndPoint.baseImageURL}/${state.nextFiveDaysWeather![state.currentSelectedDayIndex]!.weather.first.icon.trim()}@4x.png",
                   ),
                 ),
               ],

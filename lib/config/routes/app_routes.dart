@@ -4,8 +4,8 @@ import 'package:climax/features/home/logic/home/home_cubit.dart';
 import 'package:climax/features/home/presentation/screens/home/home_screen.dart';
 import 'package:climax/features/home/presentation/screens/weather_details/weather_details_screen.dart';
 import 'package:climax/features/onboarding/presentation/screens/on_boarding_screen.dart';
+import 'package:climax/features/search/logic/search_cubit.dart';
 import 'package:climax/features/search/presentation/screens/search/search_screen.dart';
-import 'package:climax/features/search/presentation/screens/search_result/search_result_details_screen.dart';
 import 'package:climax/features/splash/presentation/screens/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -53,14 +53,33 @@ class AppRoutes {
         );
       case Routes.searchRoute:
         return CupertinoPageRoute(
-          builder: (_) => const SearchScreen(),
+          builder: (context) {
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider.value(
+                  value: serviceLocator<HomeCubit>(),
+                ),
+                BlocProvider(
+                  create: (context) => serviceLocator<SearchCubit>(),
+                )
+              ],
+              child: const SearchScreen(),
+            );
+          },
+          // builder: (_) => BlocProvider.value(
+          //   value: serviceLocator<HomeCubit>(),
+
+          // ),
           settings: routeSettings,
         );
-      case Routes.searchResultDetailsRoute:
-        return CupertinoPageRoute(
-          builder: (_) => const SearchResultDetailsScreen(),
-          settings: routeSettings,
-        );
+      // case Routes.searchResultDetailsRoute:
+      //   return CupertinoPageRoute(
+      //     builder: (_) => BlocProvider.value(
+      //       value: serviceLocator<HomeCubit>(),
+      //       child: const SearchResultDetailsScreen(),
+      //     ),
+      //     settings: routeSettings,
+      //   );
       //! Default
       default:
         return _unDefinedRoute();

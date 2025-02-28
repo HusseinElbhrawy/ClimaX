@@ -29,23 +29,14 @@ class HomeScreen extends StatelessWidget {
             state.getTheNextFiveDaysWeatherStatus == RequestStatus.error) {
           return CustomErrorWidget(
             errorMessage: state.getCurrentWeatherErrorMessage!,
-            onRetry: () => context.read<HomeCubit>().getCurrentWeather(),
+            onRetry: () {
+              context.read<HomeCubit>().getCurrentWeather();
+              context.read<HomeCubit>().getNextFiveDaysWeather();
+            },
           );
         } else {
           return const HomeLoadedWidget();
         }
-        // switch (state.getCurrentWeatherStatus) {
-        //   case RequestStatus.loading:
-        //     return const CustomLoadingWidget();
-        //   case RequestStatus.initial:
-        //   case RequestStatus.success:
-        //     return const HomeLoadedWidget();
-        //   case RequestStatus.error:
-        //     return CustomErrorWidget(
-        //       errorMessage: state.getCurrentWeatherErrorMessage!,
-        //       onRetry: () => context.read<HomeCubit>().getCurrentWeather(),
-        //     );
-        // }
       },
     );
   }

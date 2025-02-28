@@ -1,3 +1,5 @@
+import 'package:climax/core/api/end_point.dart';
+import 'package:climax/core/logger/logs.dart';
 import 'package:climax/core/utils/constant.dart';
 import 'package:climax/core/utils/media_query_values.dart';
 import 'package:climax/features/home/logic/home/home_cubit.dart';
@@ -20,7 +22,8 @@ class HomeLoadedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentWeather = context.read<HomeCubit>().state.currentWeather;
+    final cubit = context.read<HomeCubit>();
+    final currentWeather = cubit.state.currentWeather;
     return Scaffold(
       appBar: const HomeAppBarWidget(),
       body: LiquidPullToRefresh(
@@ -48,9 +51,22 @@ class HomeLoadedWidget extends StatelessWidget {
               const LocationTextWidget(),
               const CustomTextDateWidget(),
               32.verticalSpace,
-              const MainWeatherInfoWidget(),
+              InkWell(
+                onTap: () {
+                  kLogger.red(currentWeather.weather.first.icon);
+                },
+                child: MainWeatherInfoWidget(
+                  temp: currentWeather!.main.temp.toStringAsFixed(1),
+                  status: currentWeather.weather.first.main,
+                  imagePath:
+                      "${EndPoint.baseImageURL}/${currentWeather.weather.first.icon.trim()}@4x.png",
+
+                  // imagePath:
+                  //     cubit.getWeatherImage(currentWeather.weather.first.main),
+                ),
+              ),
               WeatherSecondaryWidget(
-                humidity: currentWeather!.main.humidity.toString(),
+                humidity: currentWeather.main.humidity.toString(),
                 windSpeed: currentWeather.wind.speed.toString(),
                 maxTemp: currentWeather.main.tempMax.toString(),
               ),

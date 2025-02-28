@@ -87,21 +87,25 @@ class WeatherModel extends Equatable {
 class Weather extends Equatable {
   final String main;
   final String description;
+  final String icon;
   const Weather({
     required this.main,
     required this.description,
+    required this.icon,
   });
 
   @override
-  List<Object> get props => [main, description];
+  List<Object> get props => [main, description, icon];
 
   Weather copyWith({
     String? main,
     String? description,
+    String? icon,
   }) {
     return Weather(
       main: main ?? this.main,
       description: description ?? this.description,
+      icon: icon ?? this.icon,
     );
   }
 
@@ -109,6 +113,7 @@ class Weather extends Equatable {
     return <String, dynamic>{
       'main': main,
       'description': description,
+      'icon': icon,
     };
   }
 
@@ -116,6 +121,7 @@ class Weather extends Equatable {
     return Weather(
       main: map['main'] as String,
       description: map['description'] as String,
+      icon: map['icon'] as String,
     );
   }
 

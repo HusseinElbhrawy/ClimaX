@@ -4,6 +4,9 @@ import 'package:climax/core/logger/logs.dart';
 import 'package:climax/features/home/data/datasources/home_remote_data_source.dart';
 import 'package:climax/features/home/data/repositories/home_repository.dart';
 import 'package:climax/features/home/logic/home/home_cubit.dart';
+import 'package:climax/features/search/data/datasources/search_remote_data_source.dart';
+import 'package:climax/features/search/data/repositories/search_repository.dart';
+import 'package:climax/features/search/logic/search_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
@@ -31,17 +34,11 @@ Future<void> _setUpBloc() async {
       () => HomeCubit(serviceLocator()),
     );
   }
-
-  // if (!serviceLocator.isRegistered<LoginCubit>()) {
-  //   serviceLocator
-  //       .registerFactory<LoginCubit>(() => LoginCubit(serviceLocator()));
-  // }
-
-  // if (!serviceLocator.isRegistered<ForgetPasswordCubit>()) {
-  //   serviceLocator.registerFactory<ForgetPasswordCubit>(
-  //     () => ForgetPasswordCubit(serviceLocator()),
-  //   );
-  // }
+  if (!serviceLocator.isRegistered<SearchCubit>()) {
+    serviceLocator.registerFactory<SearchCubit>(
+      () => SearchCubit(serviceLocator()),
+    );
+  }
 }
 
 Future<void> _setUpRepository() async {
@@ -52,12 +49,26 @@ Future<void> _setUpRepository() async {
       ),
     );
   }
+  if (!serviceLocator.isRegistered<SearchRepository>()) {
+    serviceLocator.registerLazySingleton<SearchRepository>(
+      () => SearchRepository(
+        serviceLocator(),
+      ),
+    );
+  }
 }
 
 Future<void> _setUpDatasource() async {
   if (!serviceLocator.isRegistered<HomeRemoteDataSource>()) {
     serviceLocator.registerLazySingleton<HomeRemoteDataSource>(
       () => HomeRemoteDataSource(
+        serviceLocator(),
+      ),
+    );
+  }
+  if (!serviceLocator.isRegistered<SearchRemoteDataSource>()) {
+    serviceLocator.registerLazySingleton<SearchRemoteDataSource>(
+      () => SearchRemoteDataSource(
         serviceLocator(),
       ),
     );

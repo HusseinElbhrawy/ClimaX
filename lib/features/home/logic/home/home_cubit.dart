@@ -60,7 +60,12 @@ class HomeCubit extends Cubit<HomeState> {
       position.longitude,
     );
     result.fold(
-      (failure) => _emitWeatherError(failure.message),
+      (failure) => emit(
+        state.copyWith(
+          getCurrentWeatherStatus: RequestStatus.error,
+          getCurrentWeatherErrorMessage: failure.message,
+        ),
+      ),
       (weather) => emit(
         state.copyWith(
           getCurrentWeatherStatus: RequestStatus.success,
@@ -81,7 +86,12 @@ class HomeCubit extends Cubit<HomeState> {
     final result = await _homeRepository.getNextFiveDaysWeather(
         position.latitude, position.longitude);
     result.fold(
-      (failure) => _emitWeatherError(failure.message),
+      (failure) => emit(
+        state.copyWith(
+          getTheNextFiveDaysWeatherStatus: RequestStatus.error,
+          getTheNextFiveDaysWeatherErrorMessage: failure.message,
+        ),
+      ),
       (weather) {
         kLogger.cyan('Next 5 Days Weather fetched: ${weather.length} entries');
         emit(state.copyWith(
@@ -92,15 +102,15 @@ class HomeCubit extends Cubit<HomeState> {
     );
   }
 
-  void _emitWeatherError(String message) {
-    kLogger.red('Weather Fetch Error: $message');
-    emit(
-      state.copyWith(
-        getCurrentWeatherStatus: RequestStatus.error,
-        getCurrentWeatherErrorMessage: message,
-      ),
-    );
-  }
+  // void _emitWeatherError(String message) {
+  //   kLogger.red('Weather Fetch Error: $message');
+  // emit(
+  //   state.copyWith(
+  //     getCurrentWeatherStatus: RequestStatus.error,
+  //     getCurrentWeatherErrorMessage: message,
+  //   ),
+  // );
+  // }
 
   ///* Get Current Date
   String get currentDate =>

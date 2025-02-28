@@ -13,7 +13,7 @@ class SearchResultsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         itemCount: 10,
         itemBuilder: (context, index) {
           return Card(

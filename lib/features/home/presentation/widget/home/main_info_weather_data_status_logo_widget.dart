@@ -14,7 +14,7 @@ class MainInfoWeatherDataStatusLogoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
+    return Image.network(
       imagePath,
       width: width ?? 160.w,
       height: height ?? 160.h,
