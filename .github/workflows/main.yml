@@ -23,16 +23,26 @@ jobs:
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-            flutter-version: '3.27.2'
-            cache: true
-            cache-key: flutter
-            cache-path: ${{ github.workspace }}/flutter
-            channel: 'stable'
-
-
+          flutter-version: '3.27.2'
+          cache: true
+          cache-key: flutter
+          cache-path: ${{ github.workspace }}/flutter
+          channel: 'stable'
 
       - name: Install Dependencies
         run: flutter pub get
+
+      # Create the .env file from GitHub Secrets
+      - name: Create .env File
+        run: |
+          echo "BASE_URL=${{ secrets.BASE_URL }}" > .env
+          echo "BASE_IMAGE_URL=${{ secrets.BASE_IMAGE_URL }}" >> .env
+          echo "API_KEY=${{ secrets.API_KEY }}" >> .env
+        shell: bash
+
+      # Verify .env file exists
+      - name: Verify .env File
+        run: cat .env
 
       - name: Build APK
         run: flutter build apk --release
@@ -43,8 +53,6 @@ jobs:
           name: release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
 
-
-    #! New To Make new Github Release 
       - name: Get Version Name and Code
         id: version
         run: |
@@ -52,7 +60,7 @@ jobs:
           VERSION_CODE=$(grep 'version:' pubspec.yaml | cut -d ' ' -f 2 | cut -d '+' -f 2)
           echo "version_name=$VERSION_NAME" >> $GITHUB_ENV
           echo "version_code=$VERSION_CODE" >> $GITHUB_ENV
-      
+
       - name: Create GitHub Release
         id: create_release
         uses: softprops/action-gh-release@v1
@@ -62,6 +70,7 @@ jobs:
           draft: false
           prerelease: false
           files: build/app/outputs/flutter-apk/app-release.apk
+
 
 
       #! Old To Make new Github Release
